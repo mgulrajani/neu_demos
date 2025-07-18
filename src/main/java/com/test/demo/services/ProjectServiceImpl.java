@@ -57,5 +57,19 @@ public class ProjectServiceImpl implements ProjectService {
         // This method will find a project by its id
         return projectRepo.findById(id).orElseThrow(EntityNotFoundException::new);
 
-}}
+}
+
+    @Override
+    public List<Project> findProjectsByEmployeeId(Long employeeId) throws EntityNotFoundException {
+        // This method will find projects by employee id
+    if (projectRepo != null) {
+            return projectRepo.findByEmployeesId(employeeId);
+        }
+    // If projectRepo is null, return an empty list
+        else {
+            throw new EntityNotFoundException("No projects found for employee with id: " + employeeId);
+        }
+    }
+
+}
 

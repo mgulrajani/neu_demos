@@ -53,6 +53,13 @@ public class DemoApplication {
 		Project savedProject = projectService.addProject(project);
 		System.out.println("Saved Project: " + savedProject);
 
+		//creating a project and assigning employees to it
+
+		Project project2 = new Project("Inventory Management", LocalDate.now());
+		project2.setEmployees(Set.of(savedEmployee, savedEmployee3));
+
+		Project savedProject2 = projectService.addProject(project2);
+		System.out.println("Saved Project 2: " + savedProject2);
 
 		List<Employee> ee = service.listAllEmployees();
 		System.out.println(ee);
@@ -62,6 +69,13 @@ public class DemoApplication {
 		System.out.println("Updated Employee: " + updatedEmployee);
 		System.out.println("All Employees after update:");
 
+		System.out.println("List of projects for employee with ID " + savedEmployee.getId() + ":");
+		List<Project> projects = projectService.findProjectsByEmployeeId(savedEmployee3.getId());
+		for (Project p : projects) {
+			System.out.println(p);
+		}
+
+		// Uncomment the following lines to see the output of the Employee and Address objects
 
 
 /*

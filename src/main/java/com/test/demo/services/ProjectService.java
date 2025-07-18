@@ -14,5 +14,7 @@ public interface ProjectService {
      public Project updateProject(Long id, Project project) throws EntityNotFoundException;
      public List<Project> listAllProjects();
      public Project findProjectById(Long id) throws EntityNotFoundException;
+     //method to list Projects by employee  id
+        public List<Project> findProjectsByEmployeeId(Long employeeId) throws EntityNotFoundException;
 
 }
