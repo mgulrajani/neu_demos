@@ -2,15 +2,13 @@ package com.test.demo;
 
 import com.test.demo.dtos.AuthorDTO;
 import com.test.demo.dtos.BookDTO;
-import com.test.demo.entities.Author;
-import com.test.demo.entities.AuthorMM;
-import com.test.demo.entities.Book;
-import com.test.demo.entities.BookMM;
+import com.test.demo.entities.*;
 import com.test.demo.repos.AuthorMMRepo;
 import com.test.demo.repos.AuthorRepo;
 import com.test.demo.repos.BookMMRepo;
 import com.test.demo.repos.BookRepo;
 import com.test.demo.services.EmployeeService;
+import com.test.demo.services.ProjectService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,7 +28,40 @@ public class DemoApplication {
 
 		EmployeeService service = context.getBean(EmployeeService.class);
 
-		System.out.println(service.listAllEmployees());
+ //createing ProjectService object
+		ProjectService projectService = context.getBean(ProjectService.class);
+
+		Employee e = new Employee("Kajal","Marketing",45000D);
+		Employee e1= new Employee("kk","ss",45000D);
+		Employee e2= new Employee("d","ggg",45000D);
+		Employee e3= new Employee("nn","dd",45000D);
+
+		Employee savedEmployee = service.addEmployee(e);
+		Employee savedEmployee1 = service.addEmployee(e1);
+		Employee savedEmployee2 = service.addEmployee(e2);
+		Employee savedEmployee3 = service.addEmployee(e3);
+
+
+		//creating a project and assigning employees to it
+		Set<Employee> employees = new HashSet<>();
+		employees.add(savedEmployee);
+		employees.add(savedEmployee1);
+		employees.add(savedEmployee2);
+		employees.add(savedEmployee3);
+		Project project = new Project("Portfolio Management", LocalDate.now());
+		project.setEmployees(employees);
+		Project savedProject = projectService.addProject(project);
+		System.out.println("Saved Project: " + savedProject);
+
+
+		List<Employee> ee = service.listAllEmployees();
+		System.out.println(ee);
+		Employee eeByName = service.findEmployeeById(savedEmployee.getId());
+		System.out.println(eeByName);
+		Employee updatedEmployee = service.updateEmployee(savedEmployee.getId(), new Employee("Updated Name", "Updated Dept", 50000D));
+		System.out.println("Updated Employee: " + updatedEmployee);
+		System.out.println("All Employees after update:");
+
 
 
 /*
@@ -108,7 +139,7 @@ public class DemoApplication {
 
 */
 	}
-	}
+			}
 	/*public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
