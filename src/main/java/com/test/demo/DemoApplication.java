@@ -75,6 +75,18 @@ public class DemoApplication {
 			System.out.println(p);
 		}
 
+		Employee mm= new Employee("Jim","Sales",50000D);
+		Employee jdbcdee =  service.addEmployeejdbc(mm);
+		System.out.println("Added Employee using JDBCmain " + jdbcdee);
+
+
+		//invoke projectservice method to get employee count per project
+		System.out.println("Employee count per project:");
+		projectService.getEmployeeCountPerProject().forEach((projectName, count) -> {
+			System.out.println("Project: " + projectName + ", Employee Count: " + count);
+		});
+
+
 		// Uncomment the following lines to see the output of the Employee and Address objects
 
 

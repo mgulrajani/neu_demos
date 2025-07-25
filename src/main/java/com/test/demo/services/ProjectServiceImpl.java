@@ -2,6 +2,7 @@ package com.test.demo.services;
 
 import com.test.demo.entities.Project;
 import com.test.demo.exceptions.EntityNotFoundException;
+import com.test.demo.repos.ProjectJdbcRepo;
 import com.test.demo.repos.ProjectRepo;
 import jakarta.persistence.EntityExistsException;
 import jakarta.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -17,6 +19,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectRepo projectRepo;
 
+
+    @Autowired
+    private ProjectJdbcRepo projectJdbcRepo;
 
     @Transactional
     @Override
@@ -70,6 +75,12 @@ public class ProjectServiceImpl implements ProjectService {
             throw new EntityNotFoundException("No projects found for employee with id: " + employeeId);
         }
     }
+
+    @Override
+    public Map<String, Integer> getEmployeeCountPerProject() {
+        return projectJdbcRepo.getEmployeeCountPerProject();
+    }
+
 
 }
 

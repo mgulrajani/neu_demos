@@ -4,6 +4,7 @@ import com.test.demo.entities.Project;
 import com.test.demo.exceptions.EntityNotFoundException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProjectService {
 
@@ -16,5 +17,5 @@ public interface ProjectService {
      public Project findProjectById(Long id) throws EntityNotFoundException;
      //method to list Projects by employee  id
         public List<Project> findProjectsByEmployeeId(Long employeeId) throws EntityNotFoundException;
-
+    Map<String, Integer> getEmployeeCountPerProject();
 }

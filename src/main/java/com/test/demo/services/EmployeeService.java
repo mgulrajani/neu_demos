@@ -10,10 +10,21 @@ public interface EmployeeService {
 
     public Employee addEmployee(Employee e);
 
-    public Employee updateEmployee(Long id  , Employee e);
+    public Employee updateEmployee(Long id, Employee e);
 
     public List<Employee> listAllEmployees();
 
     public Employee findEmployeeById(Long id);
 
+    public void deleteEmployeeById(Long id);
+
+    public List<Employee> findByName(String name);
+
+    public List<Employee> findByDept(String dept);
+
+    public List<Employee> findBySalary(Double salary);
+
+    public List<Employee> findByNameAndDept(String name, String dept);
+
+    public Employee addEmployeejdbc(Employee e);
 }

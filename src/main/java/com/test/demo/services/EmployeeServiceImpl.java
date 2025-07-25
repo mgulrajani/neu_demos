@@ -2,6 +2,7 @@ package com.test.demo.services;
 
 
 import com.test.demo.entities.Employee;
+import com.test.demo.repos.EmployeeJDBCRepo;
 import com.test.demo.repos.EmployeeRepo;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -20,6 +21,11 @@ public class EmployeeServiceImpl implements  EmployeeService{
 
     @Autowired
     private EmployeeRepo repo;
+
+
+
+    @Autowired
+    private EmployeeJDBCRepo jdbcRepo;
 
 
     @Transactional
@@ -52,5 +58,39 @@ public class EmployeeServiceImpl implements  EmployeeService{
     @Override
     public Employee findEmployeeById(Long id) throws  EntityNotFoundException {
         return repo.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public void deleteEmployeeById(Long id) {
+
+    }
+
+    @Override
+    public List<Employee> findByName(String name) {
+        return List.of();
+    }
+
+    @Override
+    public List<Employee> findByDept(String dept) {
+        return List.of();
+    }
+
+    @Override
+    public List<Employee> findBySalary(Double salary) {
+        return List.of();
+    }
+
+    @Override
+    public List<Employee> findByNameAndDept(String name, String dept) {
+        return List.of();
+    }
+
+    @Transactional
+    @Override
+    public Employee addEmployeejdbc(Employee e) {
+        System.out.println("Adding employee using JDBC: inservice " + e);
+
+        return jdbcRepo.save(e);
+
     }
 }
